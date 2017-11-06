@@ -19,10 +19,13 @@ This allows us to use groups to manage, while remaining minimal. By default, Ans
 You will now use this inventory to connect to remote hosts. Ansible has a `ping` command that tests connectivity and the ability to execute a simplistic Python script. This is NOT a network (ICMP) ping, but it does test SSH connectivity.
 
 Let's ping everything in the inventory file, and you should see two successes:
+
 `ansible all -i inventory -m ping`
 
 Now, let's only ping the `database` group, where you should only see one connection and success:
+
 `ansible database -i inventory -m ping`
 
 We can now kick things up a notch, and test the ability to use `sudo` remotely by adding the `-b` flag. Ansible uses the term `become` regarding username switching, like `sudo`. By default, you want to "become" root", like so:
+
 `ansible all -i inventory -b -m ping` 
