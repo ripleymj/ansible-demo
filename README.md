@@ -15,6 +15,14 @@ In this demo, you will use three virtual machines to demonstrate how to use Ansi
 
 Note that Ansible playbooks will always run in order on any particular machine, but due to Ansible's agressive but configurable parallelism, the overall completion order may be non-deterministic.
 
+## Exercise 0 - Cloning
+
+You should clone this repository to your master machine like so:
+
+`git clone https://github.com/ripleymj/ansible-demo.git`
+
+then `cd ansible-demo` to have a local copy of the samples.
+
 ## Exercise 1 - Inventory
 To begin, create a file called `inventory` in this project root, like so:
 
