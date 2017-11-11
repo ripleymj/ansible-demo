@@ -1,0 +1,32 @@
+---
+- hosts: web
+  name: Install Apache
+  become: yes
+  vars:
+    httpd_packages:
+      - apache2
+
+  tasks:
+    - name: httpd packages are present
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ httpd_packages }}"
+      notify: restart apache service
+
+    - name: latest index.html is present
+      template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: httpd is started and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart apache service
+      service:
+        name: httpd
+        state: restarted

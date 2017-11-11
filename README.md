@@ -62,3 +62,15 @@ Using the `shell` module, you can run any shell command through Ansible. The com
 You can also run more native Ansible modules, like `apt` with ad-hoc commands. For example, let's refresh the apt package cache:
 
 `ansible all -i inventory -b -m apt -a "update_cache=true"`
+
+## Exercise 4 - Creating a playbook
+We can now create a simple playbook to contain a series of steps to be executed. Run `cd exercise4` to change to the directory for this step.
+
+### Exercise 4a - The most simplistic of playbooks
+The `exercise4a.yaml` file contains a playbook that installs Apache on the web group, and makes sure it is set to start on boot. Make sure the syntax is valid with this check, and note that your inventory path has changed since you moved to the exercise4 directory.
+
+`ansible-playbook --syntax-check -i ../inventory exercise4a.yaml`
+
+You can run this with the command:
+
+`ansible-playbook -i ../inventory exercise4a.yaml`
