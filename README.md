@@ -82,3 +82,8 @@ The `exercise4a.yaml` file contains a playbook that installs Apache on the web g
 You can run this with the command:
 
 `ansible-playbook -i ../inventory exercise4a.yaml`
+
+When this ran, you should have seen that both hosts were reported as changed. Re-Run the playbook, and neither should say it changed. Now let's break something, and watch Ansible fix it. Either log in to the `web1` host and uninstall Apache, or run an ad-hoc Ansible command, like this:
+
+`ansible web1 -i ../inventory -b -m apt -a "name=apache2 state=absent"`
+
