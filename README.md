@@ -28,11 +28,11 @@ To begin, create a file called `inventory` in this project root, like so:
 
 ```
 [web]
-IP_ADDRESS1 ansible_user=ec2-user
-IP_ADDRESS2 ansible_user=ec2-user
+web1 ansible_host=IP_ADDRESS1 ansible_user=ec2-user
+web2 ansible_host=IP_ADDRESS2 ansible_user=ec2-user
 
 [database]
-IP_ADDRESS2 ansible_user=ec2-user
+db1 ansible_host=IP_ADDRESS2 ansible_user=ec2-user
 ```
 This allows us to use groups to manage, while remaining minimal. By default, Ansible will use your username, so we are overriding that. For your own projects, you might consider using the `ansible.cfg` file to set default parameters.
 
