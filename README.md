@@ -100,3 +100,10 @@ Now take a look at the `exercise4c.yaml` file. Notice at the top that several va
 This exercise also demonstrates file copies. The second task will copy `static.html` to the web servers. The third task uses Python's Jinja2 templating language to dynamically build `index.html` and copy it to the web servers.
 
 This exercise also adds a "handler". Handers are tasks that execute conditionally, if a normal task reports that it changed something. They can be attached to any number of tasks, but will only execute once no matter how many times they are triggered. They are frequently used to restart a service, after multiple configuration tasks run, but only if the configuration is changed. For example here, the Apache service is restarted after the package is installed.
+
+## Exercise 5 - Reusable content
+
+
+## Exercise 6 - Putting it all together
+
+After working through this lab, you should have some idea of all the pieces required to build larger Ansible projects. Browse to the UUG VM project on GitHub: [jmunixusers/cs-vm-build](https://github.com/jmunixusers/cs-vm-build). It uses many of the concepts demonstrated above, as well as a few additional modules. 
