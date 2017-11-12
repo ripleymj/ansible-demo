@@ -91,4 +91,12 @@ then re-run the `exercise4a.yaml` playbook.
 
 ### Exercise 4b - Different packages for different hosts
 
-Examine the `exercise4b.yaml` file. Run syntax check, and then have Ansible apply this to your hosts.
+Examine the `exercise4b.yaml` file. Note how it extends the previous file to install different packages on different host groups. Run syntax check, and then have Ansible apply this to your hosts.
+
+### Exercise 4c - Variables and templates
+
+Now take a look at the `exercise4c.yaml` file. Notice at the top that several variables have been defined. One is a list of packages to install on the web hosts, the other, a string to be used in the `index.html` template. When the apt task runs, it will iterate over the package list.
+
+This exercise also demonstrates file copies. The second task will copy `static.html` to the web servers. The third task uses Python's Jinja2 templating language to dynamically build `index.html` and copy it to the web servers.
+
+This exercise also adds a "handler". Handers are tasks that execute conditionally, if a normal task reports that it changed something. They can be attached to any number of tasks, but will only execute once no matter how many times they are triggered. They are frequently used to restart a service, after multiple configuration tasks run, but only if the configuration is changed. For example here, the Apache service is restarted after the package is installed.

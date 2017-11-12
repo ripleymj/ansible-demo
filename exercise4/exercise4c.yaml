@@ -1,0 +1,39 @@
+---
+- hosts: web
+  name: Install Apache
+  become: yes
+  vars:
+    httpd_packages:
+      - apache2
+      - libapache2-mod-php
+    apache_test_message: This is a test message
+
+  tasks:
+    - name: httpd packages are present
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ httpd_packages }}"
+      notify: restart apache service
+
+    - name: copy static.html
+      copy:
+        src: static.html
+        dest: /var/www/html/
+
+    - name: copy index.html template
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: httpd is started and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart apache service
+      service:
+        name: httpd
+        state: restarted
