@@ -1,0 +1,26 @@
+---
+- hosts: web
+  name: Install Apache
+  become: yes
+
+  tasks:
+    - name: httpd packages are present
+      apt:
+        name: apache2
+        state: present
+
+    - name: httpd is started and enabled
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+- hosts: database
+  name: Install Postgres
+  become: yes
+
+  tasks:
+    - name: postgres packages are present
+      apt:
+        name: postgresql
+        state: present

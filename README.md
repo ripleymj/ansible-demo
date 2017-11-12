@@ -50,7 +50,7 @@ Now, let's only ping the `database` group, where you should only see one connect
 
 `ansible database -i inventory -m ping`
 
-We can now kick things up a notch, and test the ability to use `sudo` remotely by adding the `-b` flag. Ansible uses the term `become` regarding username switching, like `sudo`. By default, you want to "become" root, like so:
+We can now kick things up a notch, and test the ability to use `sudo` remotely by adding the `-b` flag. Ansible uses the term `become` regarding username switching, like `sudo`. By default, "become" assumes you want to be root, like so:
 
 `ansible all -i inventory -b -m ping` 
 
@@ -87,3 +87,8 @@ When this ran, you should have seen that both hosts were reported as changed. Re
 
 `ansible web1 -i ../inventory -b -m apt -a "name=apache2 state=absent"`
 
+then re-run the `exercise4a.yaml` playbook.
+
+### Exercise 4b - Different packages for different hosts
+
+Examine the `exercise4b.yaml` file. Run syntax check, and then have Ansible apply this to your hosts.
