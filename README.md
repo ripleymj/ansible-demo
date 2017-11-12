@@ -103,6 +103,33 @@ This exercise also adds a "handler". Handers are tasks that execute conditionall
 
 ## Exercise 5 - Reusable content
 
+We can now attempt to create reusable roles from our existing Ansible content. Change from the `exercise4` directory over to the `exercise5/roles` directory. Create a role for yourself, like so:
+
+`ansible-galaxy init my-role`
+
+Your file hierarchy should now look like this:
+
+```
+├── exercise5
+│   └── roles
+│       └── my-role
+│           ├── defaults
+│           │   └── main.yml
+│           ├── files
+│           ├── handlers
+│           │   └── main.yml
+│           ├── meta
+│           │   └── main.yml
+│           ├── README.md
+│           ├── tasks
+│           │   └── main.yml
+│           ├── templates
+│           ├── tests
+│           │   ├── inventory
+│           │   └── test.yml
+│           └── vars
+│               └── main.yml
+```
 
 ## Exercise 6 - Putting it all together
 
