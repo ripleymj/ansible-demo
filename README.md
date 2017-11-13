@@ -42,7 +42,7 @@ This allows us to use groups to manage, while remaining minimal. By default, Ans
 ## Exercise 2 - Pinging
 You will now use this inventory to connect to remote hosts. Ansible has a `ping` command that tests connectivity and the ability to execute a simplistic Python script. This is NOT a network (ICMP) ping, but it does test SSH connectivity.
 
-Let's ping everything in the inventory file, and you should see two successes:
+Let's ping everything in the `inventory` file, and you should see two successes:
 
 `ansible all -i inventory -m ping`
 
@@ -52,7 +52,7 @@ Now, let's only ping the `database` group, where you should only see one connect
 
 We can now kick things up a notch, and test the ability to use `sudo` remotely by adding the `-b` flag. Ansible uses the term `become` regarding username switching, like `sudo`. By default, "become" assumes you want to be root, like so:
 
-`ansible all -i inventory -b -m ping` 
+`ansible all -i inventory -b -m ping`
 
 Ansible also gathers "facts" about systems before running a larger operation. You can use this information to customize how the job runs. Building this kind of configuration is well beyond this demo, but let's just see what sort of information is available. Because our machines are identical, there's really no need to gather information from both of them, so let's just use the database group, like so:
 
@@ -75,7 +75,7 @@ You can also run more native Ansible modules, like `apt` with ad-hoc commands. F
 We can now create a simple playbook to contain a series of steps to be executed. Run `cd exercise4` to change to the directory for this step.
 
 ### Exercise 4a - The most simplistic of playbooks
-The `exercise4a.yml` file contains a playbook that installs Apache on the web group, and makes sure it is set to start on boot. Make sure the syntax is valid with this check, and note that your inventory path has changed since you moved to the exercise4 directory.
+The `exercise4a.yml` file contains a playbook that installs Apache on the web group, and makes sure it is set to start on boot. Make sure the syntax is valid with this check, and note that your `inventory` path has changed since you moved to the exercise4 directory.
 
 `ansible-playbook --syntax-check -i ../inventory exercise4a.yml`
 
@@ -83,7 +83,7 @@ You can run this with the command:
 
 `ansible-playbook -i ../inventory exercise4a.yml`
 
-When this ran, you should have seen that both hosts were reported as changed. Re-Run the playbook, and neither should say it changed. Now let's break something, and watch Ansible fix it. Either log in to the `web1` host and uninstall Apache, or run an ad-hoc Ansible command, like this:
+When this ran, you should have seen that both hosts were reported as changed. Re-run the playbook, and neither host should say it changed. Now let's break something, and watch Ansible fix it. Either log in to the `web1` host and uninstall Apache, or run an ad-hoc Ansible command, like this:
 
 `ansible web1 -i ../inventory -b -m apt -a "name=apache2 state=absent"`
 
@@ -91,7 +91,7 @@ then re-run the `exercise4a.yml` playbook.
 
 ### Exercise 4b - Different packages for different hosts
 
-Examine the `exercise4b.yml` file. Note how it extends the previous file to install different packages on different host groups. Run syntax check, and then have Ansible apply this to your hosts.
+Examine the `exercise4b.yml` file. Note how it extends the previous file to install different packages on different host groups. Run Ansible with `--syntax-check`, and then have Ansible apply this to your hosts.
 
 ### Exercise 4c - Variables and templates
 
