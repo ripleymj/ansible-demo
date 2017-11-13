@@ -1,0 +1,6 @@
+---
+# vars file for web-server
+httpd_packages:
+  - apache2
+  - libapache2-mod-php
+apache_test_message: This is a test message

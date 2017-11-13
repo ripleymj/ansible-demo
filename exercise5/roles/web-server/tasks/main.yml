@@ -1,0 +1,24 @@
+---
+# tasks file for web-server
+- name: httpd packages are present
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ httpd_packages }}"
+  notify: restart apache service
+
+- name: copy static.html
+  copy:
+    src: static.html
+    dest: /var/www/html/
+
+- name: copy index.html template
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+
+- name: httpd is started and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: yes
