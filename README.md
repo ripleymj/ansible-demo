@@ -131,6 +131,42 @@ Your file hierarchy should now look like this:
 │               └── main.yml
 ```
 
+After adding in the content from *Exercise 4c*, you would end up with something like this:
+
+```
+exercise5
+├── roles
+│   └── web-server
+│       ├── defaults
+│       │   └── main.yml
+│       ├── files
+│       │   └── static.html
+│       ├── handlers
+│       │   └── main.yml
+│       ├── meta
+│       │   └── main.yml
+│       ├── README.md
+│       ├── tasks
+│       │   └── main.yml
+│       ├── templates
+│       │   └── index.html.j2
+│       ├── tests
+│       │   ├── inventory
+│       │   └── test.yml
+│       └── vars
+│           └── main.yml
+└── site.yaml
+```
+
+Note the following files, in particular:
+
+* `site.yaml` - this is the playbook file that ties things together, and will be run
+* `roles/web-server/files/static.html` - copied verbation from exercise4c
+* `roles/web-server/templates/index.html.j2` - copied verbation from exercise4c
+* `roles/web-server/handlers/main.yml` - the Apache restart handler moved here
+* `roles/web-server/tasks/main.yml` - the package installation tasks moved here
+* `roles/web-server/vars/main.yml` - the package name variables moved here
+
 ## Exercise 6 - Putting it all together
 
 After working through this lab, you should have some idea of all the pieces required to build larger Ansible projects. Browse to the UUG VM project on GitHub: [jmunixusers/cs-vm-build](https://github.com/jmunixusers/cs-vm-build). It uses many of the concepts demonstrated above, as well as a few additional modules. 
