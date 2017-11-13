@@ -75,27 +75,27 @@ You can also run more native Ansible modules, like `apt` with ad-hoc commands. F
 We can now create a simple playbook to contain a series of steps to be executed. Run `cd exercise4` to change to the directory for this step.
 
 ### Exercise 4a - The most simplistic of playbooks
-The `exercise4a.yaml` file contains a playbook that installs Apache on the web group, and makes sure it is set to start on boot. Make sure the syntax is valid with this check, and note that your inventory path has changed since you moved to the exercise4 directory.
+The `exercise4a.yml` file contains a playbook that installs Apache on the web group, and makes sure it is set to start on boot. Make sure the syntax is valid with this check, and note that your inventory path has changed since you moved to the exercise4 directory.
 
-`ansible-playbook --syntax-check -i ../inventory exercise4a.yaml`
+`ansible-playbook --syntax-check -i ../inventory exercise4a.yml`
 
 You can run this with the command:
 
-`ansible-playbook -i ../inventory exercise4a.yaml`
+`ansible-playbook -i ../inventory exercise4a.yml`
 
 When this ran, you should have seen that both hosts were reported as changed. Re-Run the playbook, and neither should say it changed. Now let's break something, and watch Ansible fix it. Either log in to the `web1` host and uninstall Apache, or run an ad-hoc Ansible command, like this:
 
 `ansible web1 -i ../inventory -b -m apt -a "name=apache2 state=absent"`
 
-then re-run the `exercise4a.yaml` playbook.
+then re-run the `exercise4a.yml` playbook.
 
 ### Exercise 4b - Different packages for different hosts
 
-Examine the `exercise4b.yaml` file. Note how it extends the previous file to install different packages on different host groups. Run syntax check, and then have Ansible apply this to your hosts.
+Examine the `exercise4b.yml` file. Note how it extends the previous file to install different packages on different host groups. Run syntax check, and then have Ansible apply this to your hosts.
 
 ### Exercise 4c - Variables and templates
 
-Now take a look at the `exercise4c.yaml` file. Notice at the top that several variables have been defined. One is a list of packages to install on the web hosts, the other, a string to be used in the `index.html` template. When the apt task runs, it will iterate over the package list.
+Now take a look at the `exercise4c.yml` file. Notice at the top that several variables have been defined. One is a list of packages to install on the web hosts, the other, a string to be used in the `index.html` template. When the apt task runs, it will iterate over the package list.
 
 This exercise also demonstrates file copies. The second task will copy `static.html` to the web servers. The third task uses Python's Jinja2 templating language to dynamically build `index.html` and copy it to the web servers.
 
@@ -155,12 +155,12 @@ exercise5
 │       │   └── test.yml
 │       └── vars
 │           └── main.yml
-└── site.yaml
+└── site.yml
 ```
 
 Note the following files, in particular:
 
-* `site.yaml` - this is the playbook file that ties things together, and will be run
+* `site.yml` - this is the playbook file that ties things together, and will be run
 * `roles/web-server/files/static.html` - copied verbation from exercise4c
 * `roles/web-server/templates/index.html.j2` - copied verbation from exercise4c
 * `roles/web-server/handlers/main.yml` - the Apache restart handler moved here
