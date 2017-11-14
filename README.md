@@ -23,20 +23,40 @@ You should clone this repository to your master machine like so:
 
 then `cd ansible-demo` to have a local copy of the samples.
 
-## Exercise 1 - Inventory
-To begin, create a file called `inventory` in this project root, like so:
+## Exercise 1 - Setup and Inventory
+
+To begin, you need to create two files:
+
+* `$HOME/.ansible.cfg`
+* `$HOME/ansible-demo/inventory`
+
+### ansible.cfg
+
+You will find a sample `ansible.cfg` file in the project directory, but you will need to rename it to `.ansible.cfg` and move it to your home directory so that Ansible can find it. It contains two parameters, one to auto-accept new SSH host keys, and one to set the default remote user name.
+
+```
+[defaults]
+host_key_checking = False
+remote_user = ubuntu
+```
+
+### inventory
+
+You will also need an inventory file that tells ansible the host name, IP addresses, and group memberships of your hosts. Using the IP addresses you were given, create a file in the `ansible-demo` directory, like so:
 
 ```
 [web]
-web1 ansible_host=IP_ADDRESS1 ansible_user=ec2-user
-web2 ansible_host=IP_ADDRESS2 ansible_user=ec2-user
+web1 ansible_host=IP_ADDRESS1
+web2 ansible_host=IP_ADDRESS2
 
 [database]
-db1 ansible_host=IP_ADDRESS2 ansible_user=ec2-user
+db1 ansible_host=IP_ADDRESS2
 ```
-This allows us to use groups to manage, while remaining minimal. By default, Ansible will use your username, so we are overriding that. For your own projects, you might consider using the `ansible.cfg` file to set default parameters.
+
+This allows us to use groups to manage, while remaining minimal. We're taking the extremely cheap route here, and you will need to determine what is appropriate for your environment in personal projects.
 
 **References:**
+* [Configuration](http://docs.ansible.com/ansible/latest/intro_configuration.html)
 * [Inventory](http://docs.ansible.com/ansible/latest/intro_inventory.html)
 
 ## Exercise 2 - Pinging
@@ -69,7 +89,9 @@ Using the `shell` module, you can run any shell command through Ansible. The com
 
 You can also run more native Ansible modules, like `apt` with ad-hoc commands. For example, let's refresh the apt package cache:
 
-`ansible all -i inventory -b -m apt -a "update_cache=true"`
+`ansible web -i inventory -b -m apt -a "update_cache=true"`
+
+*This previously used the "all" group, but failed because Ansible attempts to execute in parallel, which caused locking issues on the Apt database.*
 
 ## Exercise 4 - Creating a playbook
 We can now create a simple playbook to contain a series of steps to be executed. Run `cd exercise4` to change to the directory for this step.
@@ -166,6 +188,10 @@ Note the following files, in particular:
 * `roles/web-server/handlers/main.yml` - the Apache restart handler moved here
 * `roles/web-server/tasks/main.yml` - the package installation tasks moved here
 * `roles/web-server/vars/main.yml` - the package name variables moved here
+
+You can now run your modular playbook like so:
+
+`ansible-playbook -i ../inventory site.yml`
 
 ## Exercise 6 - Putting it all together
 

@@ -1,0 +1,6 @@
+[web]
+web1 ansible_host=IP_ADDRESS1
+web2 ansible_host=IP_ADDRESS2
+
+[database]
+db1 ansible_host=IP_ADDRESS2
