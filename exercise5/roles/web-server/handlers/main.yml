@@ -2,5 +2,5 @@
 # handlers file for web-server
 - name: restart apache service
   service:
-    name: httpd
+    name: apache2
     state: restarted

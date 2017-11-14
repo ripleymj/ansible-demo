@@ -19,6 +19,6 @@
 
 - name: httpd is started and enabled
   service:
-    name: httpd
+    name: apache2
     state: started
     enabled: yes
