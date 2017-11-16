@@ -121,7 +121,7 @@ Now take a look at the `exercise4c.yml` file. Notice at the top that several var
 
 This exercise also demonstrates file copies. The second task will copy `static.html` to the web servers. The third task uses Python's Jinja2 templating language to dynamically build `index.html` and copy it to the web servers.
 
-This exercise also adds a "handler". Handers are tasks that execute conditionally, if a normal task reports that it changed something. They can be attached to any number of tasks, but will only execute once no matter how many times they are triggered. They are frequently used to restart a service, after multiple configuration tasks run, but only if the configuration is changed. For example here, the Apache service is restarted after the package is installed.
+This exercise also adds a "handler". Handlers are tasks that execute conditionally, if a normal task reports that it changed something. They can be attached to any number of tasks, but will only execute once no matter how many times they are triggered. They are frequently used to restart a service, after multiple configuration tasks run, but only if the configuration is changed. For example here, the Apache service is restarted after the package is installed.
 
 ## Exercise 5 - Reusable content
 
@@ -183,13 +183,13 @@ exercise5
 Note the following files, in particular:
 
 * `site.yml` - this is the playbook file that ties things together, and will be run
-* `roles/web-server/files/static.html` - copied verbation from exercise4c
-* `roles/web-server/templates/index.html.j2` - copied verbation from exercise4c
+* `roles/web-server/files/static.html` - copied verbatim from exercise4c
+* `roles/web-server/templates/index.html.j2` - copied verbatim from exercise4c
 * `roles/web-server/handlers/main.yml` - the Apache restart handler moved here
 * `roles/web-server/tasks/main.yml` - the package installation tasks moved here
 * `roles/web-server/vars/main.yml` - the package name variables moved here
 
-You can now run your modular playbook like so:
+Change back to the `exercise5` directory, and you can now run your modular playbook like so:
 
 `ansible-playbook -i ../inventory site.yml`
 
